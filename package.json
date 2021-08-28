@@ -5,15 +5,20 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "express": "vue-cli-service express:watch",
+    "express:run": "vue-cli-service express:run"
   },
   "dependencies": {
     "@grapecity/spread-excelio": "^14.1.6",
     "@grapecity/spread-sheets": "^14.1.6",
+    "cheerio": "^1.0.0-rc.10",
     "core-js": "^3.6.5",
     "firebase": "^9.0.0",
     "jquery": "^3.6.0",
+    "puppeteer": "^10.2.0",
     "vue": "^2.6.11",
+    "vue-sweetalert2": "^5.0.2",
     "vuetify": "^2.4.0"
   },
   "devDependencies": {
@@ -23,8 +28,10 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "font-awesome": "^4.7.0",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
+    "vue-cli-plugin-express": "~1.0.2",
     "vue-cli-plugin-vuetify": "~2.4.2",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
