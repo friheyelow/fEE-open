@@ -135,48 +135,8 @@ export default {
   },
 
   methods: {
-    showAlert(){
-      async function search(student){
-        if (this.name == student.name && this.id == student.id){
-          if (student.bool1==1 || student.bool2==1){
-            this.case='yes'
-            {
-              Swal.fire({
-                imageUrl: require('./assets/넙죽이-05.png'),
-                imageHeight: 150,
-                title: '축하합니다!',
-                text: '당신은 과비를 납부해 따봉넙죽이의 행운을 받았습니다. 아래의 "따봉넙죽아 고마워" 버튼을 누르면 당신을 포함한 가족 구성원 모두가 몸이 건강해지며 하고자 하는일이 모두 잘 풀리게 될것입니다.',
-                showCloseButton: true,
-                focusConfirm: false,
-                confirmButtonText:
-                '따봉넙죽아 고마워~💛',
-              }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                  this.case="yes2"
-                }
-              })
-            }
-          } else {
-            this.case='no'
-            {
-              Swal.fire({
-                icon: 'warning',
-                title: '과비를 납부하지 않았어요',
-                showCloseButton: true,
-                text: 'ㅠㅠ',
-                focusConfirm: false,
-                confirmButtonText: 'ㅠㅠ',
-              })
-
-            }
-          }
-        }
-      }
-      this.eedata.forEach( async (student) => {
-        await search(student)
-      })
-
+    compareWithData(){
+      
     }
   }
 }
