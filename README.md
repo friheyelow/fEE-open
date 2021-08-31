@@ -2,6 +2,11 @@
 
 ## tasks
 ```
+수요일
+목요일
+금요일
+
+
 화면 break - 대충 mobile, pc 둘 다 안어색해보이도록만 적당히 맞추기
 prime color, 
 Swal customize,
