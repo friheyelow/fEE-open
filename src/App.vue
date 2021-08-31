@@ -1,79 +1,63 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="backg">
   <v-container>
     <v-row class="text-center" justify="center" align="center">
-      <v-col cols="4">
+      <v-col cols="5" class="mt-3 pl-8 pt-0 pb-1">
         <v-img
           :src="require('./assets/kaistee.svg')"
           class="my-3"
           contain
-          height="100"
-        />
-        
+      />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="4" class="pr-1 pt-0 pb-1">
         <v-img
           v-show="this.case=='yes'"
           :src="require('./assets/넙죽이-05.png')"
-          class="my-3"
           contain
-          height="100"
         />
         <v-img
           v-show="this.case=='yes2'"
           :src="require('./assets/넙죽이-02.png')"
-          class="my-3"
           contain
-          height="100"
         />
         <v-img
           v-show="this.case=='notfound'"
           :src="require('./assets/넙죽이-06.png')"
-          class="my-3"
           contain
-          height="100"
         />
         <v-img
           v-show="this.case==null"
           :src="require('./assets/넙죽이-01.png')"
-          class="my-3"
           contain
-          height="100"
         />
         <v-img
           v-show="this.case=='no'"
           :src="require('./assets/넙죽이-01.png')"
-          class="my-3"
           contain
-          height="100"
         />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="3" class="pl-1 pt-0 pb-1">
         <v-hover v-slot="{hover}">
-          <v-btn v-if="hover" block round height="50" class="paybtn" @click="showPayInfo">
-            <i class="fas fa-hand-holding-usd rotate"></i>
-            <v-text class="ml-1">Be our family</v-text>
+          <v-btn v-if="hover" depressed fab plain color="pink" class="paybtn" @click="showPayInfo">
+            <i class="fas fa-hand-holding-usd rotate icon"></i>
           </v-btn>
-          <v-btn v-else block round height="50" class="paybtn" @click="showPayInfo">
-            <i class="fas fa-hand-holding-usd"></i>
-            <v-text class="ml-1">Be our family</v-text>
+          <v-btn v-else depressed fab plain color="pink" class="paybtn" @click="showPayInfo">
+            <i class="fas fa-hand-holding-usd icon"></i>
           </v-btn>
         </v-hover>
       </v-col>
 
-      <v-col>
-        <h1 class="display-2 font-weight-bold mb-4">
-          전자과 과비 납부 확인
-        </h1>
-        <p class="subheading font-weight-regular">
-          이름과 학번을 입력하세요!
-        </p>
+      <v-col class="pt-0 pb-1">
+        <h1 class="title1">⚡️전기및전자공학부⚡️</h1>
+        <h1 class="title2">과비Check ✅</h1>
+        <p class="maintext1">~ 오픈 베타 버전 ~</p>
+        <p class="maintext2">이름과 학번을 입력하세요!</p>
         <input type="hidden" id="accountInfo"/>
       </v-col>
     </v-row>
     <v-row class="text-center" >
-      <v-col>
+      <v-col class="pb-0">
         <v-text-field
           v-model="name"
           label="이름"
@@ -83,9 +67,7 @@
         </v-text-field>
       </v-col>
 
-      <v-col
-
-      >
+      <v-col class="pb-0">
         <v-text-field
           v-model="id"
           label="학번 (8자리)"
@@ -280,12 +262,77 @@ export default {
 </script>
 
 <style scoped>
-.paybtn{
-  letter-spacing: -0.1px;
-}
 .rotate{
     transform: rotate(360deg);
     transition: all 0.3s ease-in-out;
 }
-
+@font-face {
+  font-family: 'Recipekorea';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'dodam';
+  src: local('dodam'), url('./assets/dodam.ttf') format("truetype");
+}
+@font-face {
+font-family: 'UhBeeTokki';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeTokki.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+}
+@font-face {
+    font-family: 'Doing_well';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Doing_well.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.title1{
+  font-family:'Recipekorea';
+  color:#5A54CF;
+  font-size: 9vw;
+}
+.title2{
+  font-family:'Recipekorea';
+  color:#ec4e88;
+  font-size: 9vw;
+}
+.backg{
+  background-color:#fff7cb;
+  font-family: 'CookieRun-Regular';
+  color: #594E32;
+  font-size:9vw;
+  letter-spacing: -0.1px;
+}
+.paybtn{
+  color: #ec4e88;
+}
+.icon {
+  font-size: 12vw;
+}
+@font-face {
+font-family: 'UhBeeSeulvely';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeSeulvely.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+}
+@font-face {
+  font-family: 'CookieRun-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.maintext1 {
+  font-family: 'UhBeeSeulvely';
+  letter-spacing: -0.3vw;
+  font-size: 6vw;
+  color: #157a7a;
+  margin-bottom: 0;
+}
+.maintext2 {
+  letter-spacing: -0.1vw;
+  margin-bottom: 0;
+  font-size: 7vw;
+}
 </style>
