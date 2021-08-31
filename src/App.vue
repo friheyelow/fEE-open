@@ -98,7 +98,7 @@
           :disabled="isBtnDisabled"
           block
           color="primary"
-          @click="showAlert"
+          @click="enter"
         >조회하기</v-btn>
       </v-col>
       
@@ -122,20 +122,57 @@ export default {
       eedata: [],
     }
   },
-  created: function () {
-    axios.get(this.url).then((response) => {
-      this.eedata = response.data.data
-      console.log('done',this.eedata)
-    })
-  },
   computed: {
     isBtnDisabled(){
-      return !(this.name && this.id && this.id.length==8 && this.eedata.length>0)
+      return !(this.name && this.id && this.id.length==8)
     },
   },
 
   methods: {
-    compareWithData(){
+    enter(){
+      function compareData(name, id, data){
+        data.forEach((studentData) => {
+          if (studentData.name==name && studentData.id==id){
+            console.log("Matching data found")
+            if (studentData.bool1 || studentData.bool2){
+              console.log('yes')
+              return 0
+            } else {
+              console.log('no')
+              return 1}
+          }
+        })
+        return 2
+      }
+
+      function fireYes(){
+        Swal.fire({
+            imageUrl: require('./assets/넙죽이-05.png'),
+            imageHeight: 150,
+            title: '축하합니다!',
+            text: '당신은 과비를 납부해 따봉넙죽이의 행운을 받았습니다. 아래의 "따봉넙죽아 고마워" 버튼을 누르면 당신을 포함한 가족 구성원 모두가 몸이 건강해지며 하고자 하는일이 모두 잘 풀리게 될것입니다.',
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+            '따봉넙죽아 고마워~💛',
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this.case="yes2"
+            }
+          })
+      }
+
+      axios.get(this.url).then((response) => {
+        this.eedata = response.data.data
+        console.log('done',this.eedata)
+        this.case = compareData(this.name, this.id, this.eedata)
+        console.log('compareData sheet1 done. case is: ', this.case)
+
+        if (this.case==1){
+          fireYes()
+        }
+      })
       
     }
   }
