@@ -1,4 +1,6 @@
 <template>
+  <v-app>
+    <v-main>
   <v-container>
     <v-row class="text-center" justify="center" align="center">
       <v-col cols="4">
@@ -13,13 +15,6 @@
       <v-col cols="4">
         <v-img
           v-show="this.case=='yes'"
-          :src="require('./assets/넙죽이-02.png')"
-          class="my-3"
-          contain
-          height="100"
-        />
-        <v-img
-          v-show="this.case=='no'"
           :src="require('./assets/넙죽이-05.png')"
           class="my-3"
           contain
@@ -27,13 +22,13 @@
         />
         <v-img
           v-show="this.case=='yes2'"
-          :src="require('./assets/넙죽이-05.png')"
+          :src="require('./assets/넙죽이-02.png')"
           class="my-3"
           contain
           height="100"
         />
         <v-img
-          v-show="this.case=='error'"
+          v-show="this.case=='notfound'"
           :src="require('./assets/넙죽이-06.png')"
           class="my-3"
           contain
@@ -46,14 +41,21 @@
           contain
           height="100"
         />
+        <v-img
+          v-show="this.case=='no'"
+          :src="require('./assets/넙죽이-01.png')"
+          class="my-3"
+          contain
+          height="100"
+        />
       </v-col>
       <v-col cols="4">
         <v-hover v-slot="{hover}">
-          <v-btn v-if="hover" block round height="50" class="paybtn">
+          <v-btn v-if="hover" block round height="50" class="paybtn" @click="showPayInfo">
             <i class="fas fa-hand-holding-usd rotate"></i>
             <v-text class="ml-1">Join</v-text>
           </v-btn>
-          <v-btn v-else block round height="50" class="paybtn">
+          <v-btn v-else block round height="50" class="paybtn" @click="showPayInfo">
             <i class="fas fa-hand-holding-usd"></i>
             <v-text class="ml-1">Join</v-text>
           </v-btn>
@@ -105,6 +107,8 @@
     </v-row>
 
   </v-container>
+  </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -205,6 +209,46 @@ export default {
       else fireError()
       
       
+    },
+    showPayInfo(){
+      const swals = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      function copyAccount(){
+        this.$copyText('우리 1002-455-310519 이훈준');
+        alert('을 복사했습니다.');
+      }
+      swals.fire({
+        icon: 'info',
+        html:
+          '과비 납부는 <b>항시</b> 가능하며, ' +
+          '재학 기간 중 <b>한 번만</b> 납부하시면 <br/>'+
+          '<b>행사 참여, 경품 당첨</b> 등 전자과의 혜택을<br/>😍200%😍<br/>누리실 수 있습니다 🙌<br/>'+
+          '우리 1002-455-310519 이훈준<br/>'+
+          '입금자명: \'이름+학번뒷5자리\'  (ex. \'훈준90111\')<br/>'+
+          '금액: 3만원<br/>'
+          ,
+        showCloseButton: true,
+        showCancelButton: true,
+        showDenyButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-copy"></i> 계좌 정보 복사하기',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '닫기',
+        denyButtonText: '<i class="fa fa-instagram"></i> 학생회 인스타그램',
+      }).then((result)=>{
+        if (result.isConfirmed) {
+          copyAccount()
+        } else if (result.isDenied) {
+          window.open("http://instagram.com/shoutoutto.ee")
+        }
+      })
     }
   }
 }
