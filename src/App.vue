@@ -69,6 +69,7 @@
         <p class="subheading font-weight-regular">
           이름과 학번을 입력하세요!
         </p>
+        <input type="hidden" id="accountInfo"/>
       </v-col>
     </v-row>
     <v-row class="text-center" >
@@ -103,7 +104,6 @@
           @click="enter"
         >조회하기</v-btn>
       </v-col>
-      
     </v-row>
 
   </v-container>
@@ -219,8 +219,14 @@ export default {
         buttonsStyling: false
       })
       function copyAccount(){
-        this.$copyText('우리 1002-455-310519 이훈준');
-        alert('을 복사했습니다.');
+        const accountInfo = document.getElementById("accountInfo")
+        accountInfo.type = 'text'
+        accountInfo.value = '우리 1002-455-310519 이훈준'
+        accountInfo.select()
+        document.execCommand("copy")
+        accountInfo.selectionEnd = accountInfo.selectionStart
+        accountInfo.value = ''
+        accountInfo.type = 'hidden'
       }
       swals.fire({
         icon: 'info',
@@ -262,5 +268,8 @@ export default {
 .rotate{
     transform: rotate(360deg);
     transition: all 0.3s ease-in-out;
+}
+notseen{
+  transform: rotate(30deg);
 }
 </style>
