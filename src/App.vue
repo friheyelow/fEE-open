@@ -53,11 +53,11 @@
         <v-hover v-slot="{hover}">
           <v-btn v-if="hover" block round height="50" class="paybtn" @click="showPayInfo">
             <i class="fas fa-hand-holding-usd rotate"></i>
-            <v-text class="ml-1">Join</v-text>
+            <v-text class="ml-1">Be our family</v-text>
           </v-btn>
           <v-btn v-else block round height="50" class="paybtn" @click="showPayInfo">
             <i class="fas fa-hand-holding-usd"></i>
-            <v-text class="ml-1">Join</v-text>
+            <v-text class="ml-1">Be our family</v-text>
           </v-btn>
         </v-hover>
       </v-col>
@@ -97,7 +97,14 @@
     </v-row>
     <v-row class="text-center" >
       <v-col class="mx-1">
+        <v-btn
+          v-if="isBeingLoaded"
+          disabled
+          block
+          color="primary">넙죽이가 데이터를 긁어오고 있어요...
+        </v-btn>
         <v-btn 
+          v-else
           :disabled="isBtnDisabled"
           block
           color="primary"
@@ -122,19 +129,30 @@ export default {
       name: null,
       id: null,
       case: null,
-      url: "https://script.googleusercontent.com/macros/echo?user_content_key=REnrDPv9DMi20UT1aIfN1bGC5Jg0_VWORLyjhY7gOo_4-j2Apq1rMGsyly5wha3GBdhN2JG0cZfLMhQJfrDf4AB7l3DQ7vjkOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHawU5RwtN1n-PgPm0zS8FVyPTsgf2W1LcWWTjgyABiCNwescgP-iqikAj8oA9QqrKD5IwIxVnpQ4C1S-CINmJ16Oiu4KMG0dyd83BI-dLAEELVKjLHQ4mSKXs-G6lcwKxZg&lib=Mw1WTMMCev1up4LqHkwc4ZB_mdlfhbD35",
-      eedata: [],
+      url: "https://script.google.com/macros/s/AKfycbysvj33Elm9OD8G0_VBwLDUp3MA3OjC9P7jyxtmdcSK2vnXG61w0agq4-dcxxho82E8/exec?sheetName=",
+      eedata: [[], [], [], [], [], []],
+      loadedSheetNumb: 0,
     }
   },
   created: function(){
-    axios.get(this.url).then((response) => {
-      this.eedata = response.data.data
-      console.log('done',this.eedata)
-    })
+    const sheetList = ["주전공", "복수등", "부전공", "~17", "복부", "명단x"]
+    for (let i=0; i<sheetList.length; i++){
+      let newUrl = this.url+sheetList[i]
+      console.log("newURl", newUrl)
+      axios.get(newUrl).then((response) => {
+        this.eedata[i] = response.data.data
+        console.log('sheetname', sheetList[i])
+        console.log('done',this.eedata)
+        this.loadedSheetNumb++
+      })
+    }
   },
   computed: {
+    isBeingLoaded(){
+      return !(this.loadedSheetNumb==6)
+    },
     isBtnDisabled(){
-      return !(this.name && this.id && this.id.length==8 && this.eedata.length>0)
+      return !(this.name && this.id && this.id.length==8)
     },
   },
 
@@ -142,22 +160,26 @@ export default {
     enter(){
 
       function compareData(name, id, data){
-        for (let i = 0; i < data.length; i++) {
-          if (name==data[i].name && id==data[i].id){
-            console.log("data match!")
-            if (data[i].bool1 || data[i].bool2){
-              console.log("this user have paid")
-              return 'yes'
-            }
-            else {
-              console.log("this user have not paid")
-              return 'no'
+        for (let j = 0; j<data.length; j++){
+          for (let i = 0; i < data[j].length; i++) {
+            if (name==data[j][i].name && id==data[j][i].id){
+              console.log("data match!")
+              if (data[j][i].bool1 || data[j][i].bool2){
+                console.log("this user have paid")
+                return 'yes'
+              }
+              else {
+                console.log("this user have not paid")
+                return 'no'
+              }
             }
           }
+          console.log("loop ended. not found in the list")
+          return 'notfound'
         }
-        console.log("loop ended. not found in the list")
-        return 'notfound'
-      }
+
+        }
+        
 
       function fireYes(){
         Swal.fire({
@@ -190,10 +212,12 @@ export default {
 
       function fireError(){
         Swal.fire({
-          icon: 'error',
+          icon: 'question',
           title: '정보를 조회할 수 없어요',
-          text: '입력하신 이름과 학번이 명단에 존재하지 않아요. 정보를 올바르게 입력하셨는데도 이 창이 뜬다면 카톡 챗봇을 통해 알려주세요!',
+          text: '입력하신 이름과 학번이 명단에 존재하지 않아요. 정보를 올바르게 입력하셨는데도 이 창이 뜬다면 당황하지 마시고 카톡 챗봇을 통해 알려주세요!',
           showCloseButton: true,
+          showCancelButton: true,
+          cancelButtonText: '닫기',
           confirmButtonText: `소통EE 채팅하기`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
@@ -211,13 +235,6 @@ export default {
       
     },
     showPayInfo(){
-      const swals = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
       function copyAccount(){
         const accountInfo = document.getElementById("accountInfo")
         accountInfo.type = 'text'
@@ -228,11 +245,11 @@ export default {
         accountInfo.value = ''
         accountInfo.type = 'hidden'
       }
-      swals.fire({
+      Swal.fire({
         icon: 'info',
         html:
           '과비 납부는 <b>항시</b> 가능하며, ' +
-          '재학 기간 중 <b>한 번만</b> 납부하시면 <br/>'+
+          '재학 기간 중 <b>한 번만</b> 납부하시면 '+
           '<b>행사 참여, 경품 당첨</b> 등 전자과의 혜택을<br/>😍200%😍<br/>누리실 수 있습니다 🙌<br/>'+
           '우리 1002-455-310519 이훈준<br/>'+
           '입금자명: \'이름+학번뒷5자리\'  (ex. \'훈준90111\')<br/>'+
@@ -251,6 +268,7 @@ export default {
       }).then((result)=>{
         if (result.isConfirmed) {
           copyAccount()
+          alert('계좌가 복사되었어요.')
         } else if (result.isDenied) {
           window.open("http://instagram.com/shoutoutto.ee")
         }
@@ -269,7 +287,5 @@ export default {
     transform: rotate(360deg);
     transition: all 0.3s ease-in-out;
 }
-notseen{
-  transform: rotate(30deg);
-}
+
 </style>
