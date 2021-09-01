@@ -100,11 +100,8 @@ export default {
     const sheetList = ["주전공", "복수등", "부전공", "~17", "복부", "명단x"]
     for (let i=0; i<sheetList.length; i++){
       let newUrl = this.url+sheetList[i]
-      console.log("newURl", newUrl)
       axios.get(newUrl).then((response) => {
         this.eedata[i] = response.data.data
-        console.log('sheetname', sheetList[i])
-        console.log('done',this.eedata)
         this.loadedSheetNumb++
       })
     }
@@ -157,6 +154,9 @@ export default {
               '금액: 3만원<br/>'
             ,
             showCloseButton: true,
+            customClass: {
+              title: 'swal2title'
+            },
             focusConfirm: true,
             confirmButtonText:
             '따봉넙죽아 고마워~💛',
@@ -337,7 +337,8 @@ font-style: normal;
   color: #ec4e88 !important;
 
 }
-#app {
+.swal2title  {
   font-family: 'CookieRun-Regular';
 }
+
 </style>
