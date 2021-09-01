@@ -2,7 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import VueSweetalert2 from 'vue-sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css';
+import VueResizeText from 'vue-resize-text';
+
+Vue.use(VueResizeText)
 
 Vue.use(VueSweetalert2);
 Vue.config.productionTip = false
