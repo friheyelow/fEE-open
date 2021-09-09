@@ -1,47 +1,5 @@
 <template>
-    <v-dialog
-      v-model="dialog"
-      transition="dialog-bottom-transition"
-      max-width="600px"
-      content-class="elevation-0"
-      hide-overlay
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-hover v-slot="{hover}">
-          <transition name="fade" mode="in-out">
-          <v-btn
-          class="ma-2 primary white--text change-font"
-          v-if="hover"
-          width="100"
-          height="100"
-          outlined
-          fab
-          large
-          v-ripple="false"
-          v-bind="attrs"
-          v-on="on"
-          >
-          <i class="fas fa-bolt fa-3x rotate"></i>
-          </v-btn>
-          <v-btn
-          class="ma-2 primary--text change-font"
-          v-else
-          width="100"
-          height="100"
-          outlined
-          fab
-          large
-          v-ripple="false"
-          v-bind="attrs"
-          v-on="on"
-          >
-          <i class="fas fa-bolt fa-3x"></i>
-          </v-btn>
-          </transition>
-          
-        </v-hover>
-        
-      </template>
+  
 
       <v-card class="rounded-corner cardborder" elevation="0" >
         <v-app-bar
@@ -94,8 +52,6 @@
 
         </v-card-text>
       </v-card>
-    </v-dialog>
-
 </template>
 
 <script>

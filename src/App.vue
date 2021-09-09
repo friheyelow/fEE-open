@@ -55,26 +55,72 @@
         </v-text-field>
       </v-col>
     </v-row>
+
+
     <v-row class="text-center" >
+
+
       <v-col class="mx-1">
-        <v-btn
-          v-if="isBeingLoaded"
-    
-          disabled
-          block
-          plain
-          color="primary">넙죽이가 데이터를 긁어오고 있어요...
-        </v-btn>
-        <v-btn 
-          v-else
-          
+        
+    <v-dialog
+      v-model="dialog"
+      transition="dialog-bottom-transition"
+      max-width="600px"
+      content-class="elevation-0"
+      hide-overlay
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-hover v-slot="{hover}">
+          <transition name="fade" mode="in-out">
+          <v-btn
+          class="ma-2 primary white--text change-font"
+          v-if="hover"
+          width="100"
+          height="100"
+          outlined
+          fab
+          large
+          v-ripple="false"
+          v-bind="attrs"
+          v-on="on"
           :disabled="isBtnDisabled"
-          block
-          plain
-          color="primary"
-          @click="enter"
-        >조회하기</v-btn>
-        <L0P0></L0P0>
+          >
+          <i class="fas fa-bolt fa-3x rotate"></i>
+          </v-btn>
+          <v-btn
+          class="ma-2 primary--text change-font"
+          v-else
+          width="100"
+          height="100"
+          outlined
+          fab
+          large
+          v-ripple="false"
+          v-bind="attrs"
+          v-on="on"
+          :disabled="isBtnDisabled"
+          >
+          <i class="fas fa-bolt fa-3x"></i>
+          </v-btn>
+          </transition>
+          
+        </v-hover>
+        
+      </template>
+
+      <component :is="component"></component>
+    </v-dialog>
+
+
+    <v-btn
+      :disabled="isBtnDisabled || isBeingLoaded"
+      block
+      plain
+      class="pa-0"
+      :ripple="false"
+      color="primary">
+      {{loadingMethod()}}
+    </v-btn>
       </v-col>
     </v-row>
 
@@ -86,6 +132,7 @@
 <script>
 import Swal from 'sweetalert2'
 import axios from 'axios'
+
 const srcurl = require('./assets/srcurl.txt')
 
 import L0P0 from './components/L0P0.vue'
@@ -123,9 +170,51 @@ export default {
     isBtnDisabled(){
       return !(this.name && this.id && this.id.length==8)
     },
+    component: function(){
+      let name = this.name
+      let id = this.id
+      let data = this.eedata
+
+        let matchlist = []
+        for (let j = 0; j<data.length; j++){
+          for (let i = 0; i < data[j].length; i++) {
+            if (name==data[j][i].name && id==data[j][i].id){
+              matchlist.push(data[j][i])
+              console.log("data match!")
+            }
+          }
+          
+        }
+        console.log("matchlist is: ", matchlist)
+        if (matchlist.length == 0){
+          console.log("loop ended. not found in the list")
+          return 'notfound'
+        }
+        else {
+          for (let i = 0; i<matchlist.length; i++) {
+            if (matchlist[i].bool1 || matchlist[i].bool2){
+              console.log("this user have paid")
+              return `L0P0`
+            }
+          }
+          console.log("this user have not paid")
+          return 'no'
+        }
+
+    },
   },
 
   methods: {
+
+    loadingMethod(){
+      if (!(this.loadedSheetNumb==7)){
+        return '넙죽이가 데이터를 긁어오고 있어요···'
+      }
+      else {
+        return '외쳐 EE!'
+      }
+
+    },
     enter(){
       function compareData(name, id, data){
         let matchlist = []
@@ -266,6 +355,7 @@ export default {
 </script>
 
 <style scoped>
+
 .v-btn{
   letter-spacing: -0.2px;
 }
@@ -345,7 +435,7 @@ font-style: normal;
 .maintext2 {
   letter-spacing: -0.1vw;
   font-family: 'CookieRunOTF-Bold';
-  margin-bottom: 0;
+  margin-bottom: 2px;
 }
 .v-input {
   font-size: 1em;
