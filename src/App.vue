@@ -59,19 +59,22 @@
       <v-col class="mx-1">
         <v-btn
           v-if="isBeingLoaded"
-          rounded
+    
           disabled
           block
+          plain
           color="primary">넙죽이가 데이터를 긁어오고 있어요...
         </v-btn>
         <v-btn 
           v-else
-          rounded
+          
           :disabled="isBtnDisabled"
           block
+          plain
           color="primary"
           @click="enter"
         >조회하기</v-btn>
+        <L0P0></L0P0>
       </v-col>
     </v-row>
 
@@ -83,6 +86,9 @@
 <script>
 import Swal from 'sweetalert2'
 import axios from 'axios'
+const srcurl = require('./assets/srcurl.txt')
+
+import L0P0 from './components/L0P0.vue'
 
 export default {
   name: 'App',
@@ -91,15 +97,19 @@ export default {
       name: null,
       id: null,
       case: null,
-      url: "https://script.google.com/macros/s/AKfycbysvj33Elm9OD8G0_VBwLDUp3MA3OjC9P7jyxtmdcSK2vnXG61w0agq4-dcxxho82E8/exec?sheetName=",
-      eedata: [[], [], [], [], [], []],
+      eedata: [[], [], [], [], [], [], []],
       loadedSheetNumb: 0,
     }
   },
+  components: {
+    L0P0
+  },
   created: function(){
-    const sheetList = ["주전공", "복수등", "부전공", "~17", "복부", "명단x"]
+    const sheetList = ["21F", "주전공", "복수등", "부전공", "~17", "복부", "명단x"]
     for (let i=0; i<sheetList.length; i++){
-      let newUrl = this.url+sheetList[i]
+      let newUrl = srcurl.default+sheetList[i]
+      console.log("srcURL:", srcurl.default)
+      console.log("newURL:", newUrl)
       axios.get(newUrl).then((response) => {
         this.eedata[i] = response.data.data
         this.loadedSheetNumb++
@@ -108,7 +118,7 @@ export default {
   },
   computed: {
     isBeingLoaded(){
-      return !(this.loadedSheetNumb==6)
+      return !(this.loadedSheetNumb==7)
     },
     isBtnDisabled(){
       return !(this.name && this.id && this.id.length==8)
@@ -117,27 +127,34 @@ export default {
 
   methods: {
     enter(){
-
       function compareData(name, id, data){
+        let matchlist = []
         for (let j = 0; j<data.length; j++){
           for (let i = 0; i < data[j].length; i++) {
             if (name==data[j][i].name && id==data[j][i].id){
+              matchlist.push(data[j][i])
               console.log("data match!")
-              if (data[j][i].bool1 || data[j][i].bool2){
-                console.log("this user have paid")
-                return 'yes'
-              }
-              else {
-                console.log("this user have not paid")
-                return 'no'
-              }
             }
           }
+          
+        }
+        console.log("matchlist is: ", matchlist)
+        if (matchlist.length == 0){
           console.log("loop ended. not found in the list")
           return 'notfound'
         }
-
+        else {
+          for (let i = 0; i<matchlist.length; i++) {
+            if (matchlist[i].bool1 || matchlist[i].bool2){
+              console.log("this user have paid")
+              return 'yes'
+            }
+          }
+          console.log("this user have not paid")
+          return 'no'
         }
+
+      }
         
 
       function fireYes(){
