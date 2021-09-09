@@ -1,6 +1,4 @@
 <template>
-  
-
       <v-card class="rounded-corner cardborder" elevation="0" >
         <v-app-bar
             flat
@@ -17,7 +15,7 @@
             
             <v-spacer></v-spacer>
             <v-toolbar-title class="toolbar-font primary--text">
-              음...
+              음···
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
@@ -26,28 +24,27 @@
               icon
               plain
               v-ripple="false"
+              @click="kill"
             >
               <i class="fas fa-times fa-2x"></i>
             </v-btn>
         </v-app-bar>
 
         <v-card-text>
-            <h class="maintext">{{name}}님은 이번 학기 전기및전자공학부 재학생 명단에 없지만, 예전 명단에는 있어요.
-              아마 졸업/휴학/전과를 하신 것 같아요.
-              휴학생이시라면, 휴학 중이어도 과비를 납부했다면 전자과 사업에 참여하실 수 있어요. 
-              하지만 전자과 재학 당시 과비를 납부하신 기록이 없는 것 같아요.</h>
+            <h class="maintext">
+              {name}님은 이번 학기 재학 명단에 없어요. 졸업/휴학/전과를 하신 것으로 보여요.
+              또한, 전자과에 재학하는 동안 과비를 납부하시지 않았던 것 같아요. </h>
             
+            <v-row class="mt-2 px-2 pb-2" justify="center">
+            <v-col cols="12" sm="4" class="py-1 px-1">
+            <strange @kill="kill"></strange></v-col>
+            <v-col cols="12" sm="4" class="py-1 px-1">
+            <isgood0 @kill="kill"></isgood0></v-col>
             
-            <v-row class="mt-2 px-2 pb-2">
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <strange></strange></v-col>
-            <v-col cols="12" sm="4" class="py-1 px-1">
-            <strange></strange></v-col>
-            <v-col cols="12" sm="4" class="py-1 px-1">
-            <strange></strange></v-col>
-            
-            <!-- <isgood0></isgood0>
-            <gopay></gopay> -->
+            <gopay @kill="kill"
+            ></gopay></v-col>
+
             </v-row>
 
         </v-card-text>
@@ -56,20 +53,26 @@
 
 <script>
 import strange from "./strange.vue"
-// import isgood0 from "./isgood0.vue"
-// import gopay from "./gopay.vue"
+import isgood0 from "./isgood0.vue"
+import gopay from "./gopay.vue"
 
 export default {
   data() {
     return {
-      name: "testname",
+
     }
   },
   components:{
     strange,
-    // isgood0,
-    // gopay,
+    isgood0,
+    gopay,
   },
+  methods: {
+    kill(){
+      this.$emit('kill')
+      console.log("L0P0")
+    }
+  }
 }
 </script>
 
@@ -94,6 +97,10 @@ export default {
 }
 .maintext {
   font-family: 'CookieRun-Regular';
+  color: #594E32;
+  letter-spacing: -0.1px;
+  font-size: 18px;
+  line-height: 1.5;
 }
 .rotate{
   transform: rotate(360deg);

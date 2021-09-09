@@ -25,7 +25,6 @@
         <div class="mt-1" v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '25vw', delay: 200,}">
           <p class="maintext2">이름과 학번을 입력하세요!</p>
         </div>
-        <input type="hidden" id="accountInfo"/>
       </v-col>
       </v-row>
     <v-row class="text-center" >
@@ -108,7 +107,7 @@
         
       </template>
 
-      <component :is="component"></component>
+      <component :is="component" @kill="kill"></component>
     </v-dialog>
 
 
@@ -130,12 +129,15 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2'
 import axios from 'axios'
 
 const srcurl = require('./assets/srcurl.txt')
 
 import L0P0 from './components/L0P0.vue'
+import L0P1 from './components/L0P1.vue'
+import L1P0 from './components/L1P0.vue'
+import L1P1 from './components/L1P1.vue'
+import notfound from './components/notfound.vue'
 
 export default {
   name: 'App',
@@ -146,10 +148,15 @@ export default {
       case: null,
       eedata: [[], [], [], [], [], [], []],
       loadedSheetNumb: 0,
+      dialog: null,
     }
   },
   components: {
-    L0P0
+    L0P0,
+    L0P1,
+    L1P0,
+    L1P1,
+    notfound,
   },
   created: function(){
     const sheetList = ["21F", "주전공", "복수등", "부전공", "~17", "복부", "명단x"]
@@ -174,6 +181,7 @@ export default {
       let name = this.name
       let id = this.id
       let data = this.eedata
+      let isMember = false
 
         let matchlist = []
         for (let j = 0; j<data.length; j++){
@@ -181,6 +189,9 @@ export default {
             if (name==data[j][i].name && id==data[j][i].id){
               matchlist.push(data[j][i])
               console.log("data match!")
+              if (j==0){
+                isMember = true
+              }
             }
           }
           
@@ -188,24 +199,23 @@ export default {
         console.log("matchlist is: ", matchlist)
         if (matchlist.length == 0){
           console.log("loop ended. not found in the list")
-          return 'notfound'
+          return `notfound`
         }
         else {
           for (let i = 0; i<matchlist.length; i++) {
             if (matchlist[i].bool1 || matchlist[i].bool2){
-              console.log("this user have paid")
-              return `L0P0`
+              if (isMember) return `L1P1`
+              else return `L0P1`
             }
           }
-          console.log("this user have not paid")
-          return 'no'
+          if (isMember) return `L1P0`
+          else return `L0P0`
         }
 
     },
   },
 
   methods: {
-
     loadingMethod(){
       if (!(this.loadedSheetNumb==7)){
         return '넙죽이가 데이터를 긁어오고 있어요···'
@@ -215,139 +225,9 @@ export default {
       }
 
     },
-    enter(){
-      function compareData(name, id, data){
-        let matchlist = []
-        for (let j = 0; j<data.length; j++){
-          for (let i = 0; i < data[j].length; i++) {
-            if (name==data[j][i].name && id==data[j][i].id){
-              matchlist.push(data[j][i])
-              console.log("data match!")
-            }
-          }
-          
-        }
-        console.log("matchlist is: ", matchlist)
-        if (matchlist.length == 0){
-          console.log("loop ended. not found in the list")
-          return 'notfound'
-        }
-        else {
-          for (let i = 0; i<matchlist.length; i++) {
-            if (matchlist[i].bool1 || matchlist[i].bool2){
-              console.log("this user have paid")
-              return 'yes'
-            }
-          }
-          console.log("this user have not paid")
-          return 'no'
-        }
-
-      }
-        
-
-      function fireYes(){
-        Swal.fire({
-            imageUrl: require('./assets/넙죽이-05.png'),
-            imageHeight: 150,
-            title: '축하합니다!',
-            html:
-              '<h class="test">과비 납는 <b>항시</b> 가능하며, </h>' +
-              '재학 기간 중 <b>한 번만</b> 납부하시면 '+
-              '<b>행사 참여, 경품 당첨</b> 등 전자과의 혜택을<br/>😍200%😍<br/>누리실 수 있습니다 🙌<br/>'+
-              '우리 1002-455-310519 이훈준<br/>'+
-              '입금자명: \'이름+학번뒷5자리\'  (ex. \'훈준90111\')<br/>'+
-              '금액: 3만원<br/>'
-            ,
-            showCloseButton: true,
-            customClass: {
-              title: 'swal2title'
-            },
-            focusConfirm: true,
-            confirmButtonText:
-            '따봉넙죽아 고마워~💛',
-          }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-              this.case="yes2"
-            }
-          })
-      }
-
-      function fireNo(){
-        Swal.fire({
-          icon: 'warning',
-          title: '과비를 납부하지 않았어요',
-          showCloseButton: true,
-          text: 'ㅠㅠ',
-          focusConfirm: false,
-          confirmButtonText: 'ㅠㅠ',
-        })
-      }
-
-      function fireError(){
-        Swal.fire({
-          icon: 'question',
-          title: '정보를 조회할 수 없어요',
-          text: '입력하신 이름과 학번이 명단에 존재하지 않아요. 정보를 올바르게 입력하셨는데도 이 창이 뜬다면 당황하지 마시고 카톡 챗봇을 통해 알려주세요!',
-          showCloseButton: true,
-          showCancelButton: true,
-          cancelButtonText: '닫기',
-          confirmButtonText: `소통EE 채팅하기`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            window.open("http://pf.kakao.com/_SVxdFT","_self")
-          }
-        })
-      }
-
-      this.case = compareData(this.name, this.id, this.eedata)
-      if (this.case=='yes') fireYes()
-      else if (this.case=='no') fireNo()
-      else fireError()
-      
-      
-    },
-    showPayInfo(){
-      function copyAccount(){
-        const accountInfo = document.getElementById("accountInfo")
-        accountInfo.type = 'text'
-        accountInfo.value = '우리 1002-455-310519 이훈준'
-        accountInfo.select()
-        document.execCommand("copy")
-        accountInfo.selectionEnd = accountInfo.selectionStart
-        accountInfo.value = ''
-        accountInfo.type = 'hidden'
-      }
-      Swal.fire({
-        icon: 'info',
-        html:
-          '<h>과비 납부는 <b>항시</b> 가능하며, </h>' +
-          '재학 기간 중 <b>한 번만</b> 납부하시면 '+
-          '<b>행사 참여, 경품 당첨</b> 등 전자과의 혜택을<br/>😍200%😍<br/>누리실 수 있습니다 🙌<br/>'+
-          '우리 1002-455-310519 이훈준<br/>'+
-          '입금자명: \'이름+학번뒷5자리\'  (ex. \'훈준90111\')<br/>'+
-          '금액: 3만원<br/>'
-          ,
-        showCloseButton: true,
-        showCancelButton: true,
-        showDenyButton: true,
-        focusConfirm: false,
-        confirmButtonText:
-          '<i class="fa fa-copy"></i> 계좌 정보 복사하기',
-        confirmButtonAriaLabel: 'Thumbs up, great!',
-        cancelButtonText:
-          '닫기',
-        denyButtonText: '<i class="fa fa-instagram"></i> 학생회 인스타그램',
-      }).then((result)=>{
-        if (result.isConfirmed) {
-          copyAccount()
-          alert('계좌가 복사되었어요.')
-        } else if (result.isDenied) {
-          window.open("http://instagram.com/shoutoutto.ee")
-        }
-      })
+    kill(){
+      this.dialog = !this.dialog
+      console.log("close signal at app.vue")
     }
   }
 }
@@ -444,8 +324,8 @@ font-style: normal;
   color: #ec4e88 !important;
 
 }
-.swal2title  {
-  font-family: 'CookieRun-Regular';
+.v-btn--outlined{
+  border: 2px solid currentColor
 }
 
 </style>
