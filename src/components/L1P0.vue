@@ -5,7 +5,7 @@
             color="rgba(0, 0, 0, 0)"
           >
             <v-btn
-              color="primary"
+              color="transparent"
               icon
               plain
               v-ripple="false"
@@ -14,13 +14,13 @@
             </v-btn>
             
             <v-spacer></v-spacer>
-            <v-toolbar-title class="toolbar-font primary--text">
+            <v-toolbar-title class="toolbar-font purple1--text">
               어라라··?
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
             <v-btn
-              color="primary"
+              color="purple0"
               icon
               plain
               v-ripple="false"
@@ -32,15 +32,15 @@
 
         <v-card-text>
             <h class="maintext">
-              {name}님은 전자과에 재학 중이시네요. 과비 납부를 안 하신 것 같아요. </h>
+              <h class="strong">{{inputname}}</h>님은 전자과에 재학 중이시네요. 과비 납부를 안 하신 것 같아요. </h>
             <v-row class="mt-2 px-2 pb-2" justify="center">
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <strange @kill="kill"></strange></v-col>
+            <strange @showparent="showparent"></strange></v-col>
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <isgood0 @kill="kill"></isgood0></v-col>
+            <isgood0 @showparent="showparent"></isgood0></v-col>
             
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <gopay @kill="kill"></gopay></v-col>
+            <gopay @showparent="showparent"></gopay></v-col>
 
             </v-row>
 
@@ -54,6 +54,12 @@ import isgood0 from "./isgood0.vue"
 import gopay from "./gopay.vue"
 
 export default {
+  props: {
+    inputname: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
 
@@ -67,24 +73,23 @@ export default {
   methods:{
     kill(){
       this.$emit('kill')
-      console.log("L1P0")
+    },
+    showparent(show){
+      this.$emit('showparent',show)
     }
-  }
+  },
+
 }
 </script>
 
 <style lang="scss" scoped>
 .v-btn{
-  font-family: raleway, sans-serif;
-  font-weight: 600;
+  font-family: 'CookieRun-Regular';
+  letter-spacing: -0.1px;
   font-style: normal;
 }
 .v-btn--outlined{
   border: 2px solid currentColor
-}
-.v-card--outlined{
-  border: 4px solid 
-
 }
 .toolbar-font{
   font-family: 'CookieRunOTF-Bold';
@@ -107,6 +112,13 @@ export default {
   border-radius:20px;
 }
 .cardborder{
-  border: 3px solid #ec4e88;
+  border: 3px solid #CB63E5;
+}
+.strong {
+  font-family: 'CookieRunOTF-Bold';
+  color: #CB63E5;
+  letter-spacing: -0.1px;
+  font-size: 18px;
+  line-height: 1.5;
 }
 </style>

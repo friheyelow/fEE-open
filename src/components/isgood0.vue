@@ -11,7 +11,7 @@
           <transition name="fade" mode="in-out">
           <v-btn
           v-if="hover"
-          class=" primary--text"
+          class="cardblue1 white--text"
           depressed
           block
           height="40"
@@ -19,11 +19,12 @@
           v-ripple="false"
           v-bind="attrs"
           v-on="on"
+          @click="next"
           >
-          <i class="fas fa-meh-rolling-eyes fa-2x "></i>
+          <i class="fas fa-question fa-2x "></i>
           </v-btn>
           <v-btn
-          class=" primary--text"
+          class="cardblue0 white--text"
           v-else
           depressed
           block
@@ -32,8 +33,9 @@
           v-ripple="false"
           v-bind="attrs"
           v-on="on"
+          @click="next"
           >
-          과비를 내면 뭐가 좋나요?
+          전자과 과비란?
           </v-btn>
           </transition>
           
@@ -46,26 +48,27 @@
             color="rgba(0, 0, 0, 0)"
           >
             <v-btn
-              color="primary"
+              color="#317FE1"
               icon
               plain
               v-ripple="false"
+              @click="before"
             >
               <i class="fas fa-arrow-left fa-2x"></i>
             </v-btn>
             
             <v-spacer></v-spacer>
-            <v-toolbar-title class="toolbar-font primary--text">
+            <v-toolbar-title class="toolbar-font cardblue1--text">
               전자과 과비?
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
             <v-btn
-              color="primary"
+              color="#317FE1"
               icon
               plain
               v-ripple="false"
-              @click="kill"
+              @click="dialog=false"
             >
               <i class="fas fa-times fa-2x"></i>
             </v-btn>
@@ -81,7 +84,8 @@
               </v-card-text>
             </v-card>
             <h class="maintext">
-              과비 납부는 항시 가능하며, 재학 기간 중 한 번만 납부하시면 졸업 시까지 행사 참여, 경품 당첨 등 전자과의 혜택을 200% 누리실 수 있어요.
+              과비 납부는 항시 가능하며, 재학 기간 중 <h class="strong">한 번만</h> 납부하시면 졸업 시까지 <h class="strong">행사 참여, 경품 당첨</h> 등 전자과의 혜택을 <h class="strong">200%</h> 누리실 수 있어요.
+              이번 학기 전자과 학생회가 하는 사업이 궁금하시다면 아래의 버튼을 눌러 인스타그램 게시물을 봐주세요.
             </h>
             
             <v-row class="mt-2 px-2 pb-2" justify="center">
@@ -91,7 +95,7 @@
                   <transition name="fade" mode="in-out">
                   <v-btn
                   v-if="hover"
-                  class=" primary--text"
+                  class="orange1 white--text"
                   depressed
                   block
                   height="40"
@@ -101,10 +105,10 @@
                   v-on="on"
                   @click="openSNS()"
                   >
-                  <i class="fas fa-meh-rolling-eyes fa-2x "></i>
+                  <i class="fab fa-instagram fa-2x "></i>
                   </v-btn>
                   <v-btn
-                  class=" primary--text"
+                  class="orange0 white--text"
                   v-else
                   depressed
                   block
@@ -124,8 +128,9 @@
             
             </v-col>
             <v-col cols="12" sm="4" class="py-1 px-1">
-              <gopay></gopay>
+              <gopay @showparent="showparent"></gopay>
             </v-col>
+
 
             </v-row>
 
@@ -138,6 +143,11 @@
 <script>
 import gopay from "./gopay.vue"
   export default {
+    data(){
+      return {
+        dialog: null,
+      }
+    },
     components:{
       gopay
     },
@@ -145,10 +155,18 @@ import gopay from "./gopay.vue"
       openSNS(){
         window.open("http://instagram.com/shoutoutto.ee")
       },
-      kill() {
-        this.$emit("kill")
-        console.log("kill emitted")
-        this.dialog = !this.dialog
+      before(){
+        this.$emit("showparent", true)
+        console.log("before clicked")
+        this.dialog = false
+      },
+      next(){
+        this.$emit("showparent", false)
+        console.log("next clicked")
+        this.dialog = true
+      },
+      showparent(show){
+        this.dialog = show
       }
     }
 
@@ -158,6 +176,7 @@ import gopay from "./gopay.vue"
 <style lang="scss" scoped>
 .v-btn{
   font-family: 'CookieRun-Regular';
+  letter-spacing: -0.1px;
   font-style: normal;
 }
 .v-btn--outlined{
@@ -188,9 +207,16 @@ import gopay from "./gopay.vue"
   border-radius:20px;
 }
 .cardborder{
-  border: 3px solid #ec4e88;
+  border: 3px solid #317FE1;
 }
 .cardborder2{
   border: 3px solid #317FE1;
+}
+.strong {
+  font-family: 'CookieRunOTF-Bold';
+  color: #2370ce;
+  letter-spacing: -0.1px;
+  font-size: 18px;
+  line-height: 1.5;
 }
 </style>

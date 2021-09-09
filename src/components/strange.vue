@@ -1,3 +1,4 @@
+
 <template>
     <v-dialog
       v-model="dialog"
@@ -11,7 +12,7 @@
           <transition name="fade" mode="in-out">
           <v-btn
           v-if="hover"
-          class=" primary--text"
+          class="orange1 white--text"
           depressed
           block
           height="40"
@@ -19,11 +20,12 @@
           v-ripple="false"
           v-bind="attrs"
           v-on="on"
+          @click="next"
           >
           <i class="fas fa-meh-rolling-eyes fa-2x "></i>
           </v-btn>
           <v-btn
-          class=" primary--text"
+          class="orange0 white--text"
           v-else
           depressed
           block
@@ -32,6 +34,7 @@
           v-ripple="false"
           v-bind="attrs"
           v-on="on"
+          @click="next"
           >
           냈던 것 같은데···
           </v-btn>
@@ -46,38 +49,38 @@
             color="rgba(0, 0, 0, 0)"
           >
             <v-btn
-              color="primary"
+              color="orange0"
               icon
               plain
               v-ripple="false"
+              @click="before"
             >
               <i class="fas fa-arrow-left fa-2x"></i>
             </v-btn>
             
             <v-spacer></v-spacer>
-            <v-toolbar-title class="toolbar-font primary--text">
-              과비를 냈는데 안 냈다고 되어있다면
+            <v-toolbar-title class="toolbar-font orange1--text">
+              오류 신고
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
             <v-btn
-              color="primary"
+              color="orange0"
               icon
               plain
               v-ripple="false"
-              @click="kill"
+              @click="dialog=false"
             >
               <i class="fas fa-times fa-2x"></i>
             </v-btn>
         </v-app-bar>
 
-        <v-card-text>
+        <v-card-text class=text-center>
             <h class="maintext">
               총무가 수기로 구글 스프레드시트를 수정하는 과정에서 문제가 생겼을 수 있어요.
               당황하지 마시고 아래의 버튼을 눌러 저희에게 알려주시면
-              빠르게 해결해드릴게요! (모바일에서만 작동합니다)
+              빠르게 해결해드릴게요! (버튼은 모바일에서만 작동합니다)
             </h>
-            
             <v-row class="mt-2 px-2 pb-2" justify="center">
             <v-col cols="12" sm="4" class="py-1 px-1" >
               
@@ -85,7 +88,7 @@
                   <transition name="fade" mode="in-out">
                   <v-btn
                   v-if="hover"
-                  class=" primary--text"
+                  class="orange1 white--text"
                   depressed
                   block
                   height="40"
@@ -95,10 +98,11 @@
                   v-on="on"
                   @click="openKatalk()"
                   >
-                  <i class="fas fa-meh-rolling-eyes fa-2x "></i>
+                  <i class="fas fa-rocket fa-2x "></i>
+            
                   </v-btn>
                   <v-btn
-                  class=" primary--text"
+                  class="orange0 white--text"
                   v-else
                   depressed
                   block
@@ -118,6 +122,7 @@
             
             </v-col>
 
+
             </v-row>
 
         </v-card-text>
@@ -128,15 +133,25 @@
 
 <script>
   export default {
+    data(){
+      return {
+        dialog: null,
+      }
+    },
 
     methods: {
       openKatalk(){
         window.open('http://qr.kakao.com/talk/mV45Z9kUIEu3HrR5XcA8eWcspmM-')
       },
-      kill() {
-        this.$emit("kill")
-        console.log("kill emitted")
-        this.dialog = !this.dialog
+      before(){
+        this.$emit("showparent", true)
+        console.log("before clicked")
+        this.dialog = false
+      },
+      next(){
+        this.$emit("showparent", false)
+        console.log("next clicked")
+        this.dialog = true
       }
     }
 
@@ -146,13 +161,14 @@
 <style lang="scss" scoped>
 .v-btn{
   font-family: 'CookieRun-Regular';
+  letter-spacing: -0.1px;
   font-style: normal;
 }
 .v-btn--outlined{
   border: 2px solid currentColor
 }
 .v-card--outlined{
-  border: 4px solid 
+  border: 4px solid;
 
 }
 .toolbar-font{
@@ -173,9 +189,11 @@
   transition: all 0.4s ease-in-out;
 }
 .rounded-corner{
-  border-radius:20px;
+  border-radius: 20px;
 }
 .cardborder{
-  border: 3px solid #ec4e88;
+  border: 3px solid #FD923A ;
 }
+
 </style>
+

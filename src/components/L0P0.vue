@@ -5,22 +5,23 @@
             color="rgba(0, 0, 0, 0)"
           >
             <v-btn
-              color="primary"
+              color="transparent"
               icon
               plain
               v-ripple="false"
+              
             >
               <i class="fas fa-arrow-left fa-2x"></i>
             </v-btn>
             
             <v-spacer></v-spacer>
-            <v-toolbar-title class="toolbar-font primary--text">
+            <v-toolbar-title class="toolbar-font purple1--text">
               음···
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
             <v-btn
-              color="primary"
+              color="purple0"
               icon
               plain
               v-ripple="false"
@@ -32,17 +33,17 @@
 
         <v-card-text>
             <h class="maintext">
-              {name}님은 이번 학기 재학 명단에 없어요. 졸업/휴학/전과를 하신 것으로 보여요.
+              <h class="strong">{{inputname}}</h>님은 이번 학기 재학 명단에 없어요. 졸업/휴학/전과를 하신 것으로 보여요.
               또한, 전자과에 재학하는 동안 과비를 납부하시지 않았던 것 같아요. </h>
             
             <v-row class="mt-2 px-2 pb-2" justify="center">
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <strange @kill="kill"></strange></v-col>
+            <strange @showparent="showparent"></strange></v-col>
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <isgood0 @kill="kill"></isgood0></v-col>
+            <isgood0 @showparent="showparent"></isgood0></v-col>
             
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <gopay @kill="kill"
+            <gopay @showparent="showparent"
             ></gopay></v-col>
 
             </v-row>
@@ -57,6 +58,12 @@ import isgood0 from "./isgood0.vue"
 import gopay from "./gopay.vue"
 
 export default {
+  props: {
+    inputname: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
 
@@ -70,9 +77,12 @@ export default {
   methods: {
     kill(){
       this.$emit('kill')
-      console.log("L0P0")
+    },
+    showparent(show){
+      this.$emit('showparent',show)
     }
-  }
+  },
+  
 }
 </script>
 
@@ -88,6 +98,13 @@ export default {
 .v-card--outlined{
   border: 4px solid 
 
+}
+.strong {
+  font-family: 'CookieRunOTF-Bold';
+  color: #CB63E5;
+  letter-spacing: -0.1px;
+  font-size: 18px;
+  line-height: 1.5;
 }
 .toolbar-font{
   font-family: 'CookieRunOTF-Bold';
@@ -110,6 +127,6 @@ export default {
   border-radius:20px;
 }
 .cardborder{
-  border: 3px solid #ec4e88;
+  border: 3px solid #BD52D8;
 }
 </style>

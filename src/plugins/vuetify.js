@@ -20,6 +20,9 @@ export default new Vuetify({
         green1: '#84C732',
         purple0: '#CB63E5',
         purple1: '#BD52D8',
+        
+        cardblue0: '#317FE1',
+        cardblue1: '#2370ce'
       }
     }
   }

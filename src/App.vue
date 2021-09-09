@@ -14,7 +14,7 @@
     <v-row class="text-center" justify="center" align="center">
 
       <v-col class="pt-0 pb-0 ma-0">
-        <div style="line-height:105%" v-resize-text="{ratio:1.6, minFontSize: '26px', maxFontSize: '100px', delay: 200,}">
+        <div style="line-height:105%" v-resize-text="{ratio:1.4, minFontSize: '27px', maxFontSize: '25vw', delay: 200,}">
           <h class="title1">⚡️전기및전자공학부⚡️<br/></h>
           <h class="title2">과비Check ✅</h>
         </div>
@@ -28,7 +28,7 @@
       </v-col>
       </v-row>
     <v-row class="text-center" >
-      <v-col class="pb-0">
+      <v-col class="pb-0 input">
         <v-text-field
           v-model="name"
           label="이름"
@@ -37,11 +37,12 @@
           clearable
           hide-details
           outlined
+          @change="updateName"
         >
         </v-text-field>
       </v-col>
 
-      <v-col class="pb-0">
+      <v-col class="pb-0 input">
         <v-text-field
           v-model="id"
           class="inputf"
@@ -72,7 +73,7 @@
         <v-hover v-slot="{hover}">
           <transition name="fade" mode="in-out">
           <v-btn
-          class="ma-2 primary white--text change-font"
+          class="ma-2 orange0 white--text change-font "
           v-if="hover"
           width="100"
           height="100"
@@ -87,7 +88,7 @@
           <i class="fas fa-bolt fa-3x rotate"></i>
           </v-btn>
           <v-btn
-          class="ma-2 primary--text change-font"
+          class="ma-2 orange0--text change-font hand"
           v-else
           width="100"
           height="100"
@@ -107,7 +108,7 @@
         
       </template>
 
-      <component :is="component" @kill="kill"></component>
+      <component :is="component" @kill="kill" :inputname="firstname" @showparent="showparent"></component>
     </v-dialog>
 
 
@@ -117,7 +118,7 @@
       plain
       class="pa-0"
       :ripple="false"
-      color="primary">
+      color="orange1">
       {{loadingMethod()}}
     </v-btn>
       </v-col>
@@ -145,10 +146,10 @@ export default {
     return {
       name: null,
       id: null,
-      case: null,
       eedata: [[], [], [], [], [], [], []],
       loadedSheetNumb: 0,
       dialog: null,
+      firstname: null,
     }
   },
   components: {
@@ -175,7 +176,7 @@ export default {
       return !(this.loadedSheetNumb==7)
     },
     isBtnDisabled(){
-      return !(this.name && this.id && this.id.length==8)
+      return !(this.name && this.id && this.id.length==8 && this.loadedSheetNumb==7)
     },
     component: function(){
       let name = this.name
@@ -223,11 +224,18 @@ export default {
       else {
         return '외쳐 EE!'
       }
-
+    },
+    updateName(){
+      this.firstname = this.name.substring(1,)
+      console.log("fistname is ", this.firstname)
     },
     kill(){
       this.dialog = !this.dialog
       console.log("close signal at app.vue")
+    },
+    showparent(show){
+      this.dialog = show
+      console.log("show at app.vue: ", show)
     }
   }
 }
@@ -235,7 +243,9 @@ export default {
 </script>
 
 <style scoped>
-
+* {
+  cursor: url(./assets/cur.gif), grab;
+}
 .v-btn{
   letter-spacing: -0.2px;
 }
@@ -267,24 +277,22 @@ font-style: normal;
 }
 .title1{
   font-family:'Recipekorea';
-  color:#5A54CF;
+  color:#2370ce;
 }
 .title2{
   font-family:'Recipekorea';
-  color:#ec4e88;
+  color:#84C732;
 }
 .test{
   font-family:'Recipekorea';
 }
 .backg{
-  background-color:#fff7cb;
+  background-color:#fdfdfd;
   font-family: 'CookieRun-Regular';
   color: #594E32;
   letter-spacing: -0.1px;
 }
-.paybtn{
-  color: #ec4e88;
-}
+
 .icon {
   font-size: 12vw;
 }
@@ -309,23 +317,45 @@ font-style: normal;
 .maintext1 {
   font-family: 'UhBeeSeulvely';
   letter-spacing: -0.3vw;
-  color: #157a7a;
+  color: #25AABE;
   margin-bottom: 0;
 }
 .maintext2 {
   letter-spacing: -0.1vw;
   font-family: 'CookieRunOTF-Bold';
   margin-bottom: 2px;
+  color: #BD52D8;
 }
 .v-input {
   font-size: 1em;
 }
 .inputf  {
   color: #ec4e88 !important;
-
 }
+
 .v-btn--outlined{
-  border: 2px solid currentColor
+  border: 3px solid #FD923A;
+}
+.v-btn--outlined:disabled{
+  border: 3px solid #a09e9d;
+  background-color: rgb(202, 202, 202);
+}
+.hand{
+    animation:rotate infinite ;
+    animation-duration: 3.6s;
+}
+@keyframes rotate {
+  0% {transform: rotate(0deg); }
+  2% {transform: rotate(10deg);}
+  4% {transform: rotate(0deg);}
+  6% {transform: rotate(-10deg);}
+  8% {transform: rotate(0deg);}
+  10% {transform: rotate(10deg);}
+  12% {transform: rotate(0deg);}
+  14% {transform: rotate(-10deg);}
+  16% {transform: rotate(0deg);}
+  100% {transform: rotate(0deg);}
+  
 }
 
 </style>

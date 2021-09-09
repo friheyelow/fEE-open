@@ -5,7 +5,7 @@
             color="rgba(0, 0, 0, 0)"
           >
             <v-btn
-              color="primary"
+              color="transparent"
               icon
               plain
               v-ripple="false"
@@ -32,8 +32,8 @@
 
         <v-card-text>
             <h class="maintext">
-              {name}님은 전자과에 재학 중이시네요. 당신은 과비를 납부해 따봉넙죽이의 행운을 받았습니다.
-              아래의 "따봉넙죽아 고마워" 버튼을 누르면 당신을 포함한 가족 구성원 모두가 몸이 건강해지며
+              <h class="strong">{{inputname}}</h>님은 전자과에 재학 중이시네요. 당신은 과비를 납부해 따봉넙죽이의 행운을 받았습니다.
+              아래의 <h class="strong">"따봉넙죽아 고마워"</h> 버튼을 누르면 당신을 포함한 가족 구성원 모두가 몸이 건강해지며
               하고자 하는일이 모두 잘 풀리게 될것입니다.</h>
             <v-row justify=center>
               <v-col cols="3"/>
@@ -50,7 +50,7 @@
                   <transition name="fade" mode="in-out">
                   <v-btn
                   v-if="hover"
-                  class=" primary--text"
+                  class="pink1 white--text"
                   depressed
                   block
                   height="40"
@@ -60,10 +60,10 @@
                   v-on="on"
                   @click="change()"
                   >
-                  <i class="fas fa-meh-rolling-eyes fa-2x "></i>
+                  <i class="fas fa-heart fa-2x "></i>
                   </v-btn>
                   <v-btn
-                  class=" primary--text"
+                  class="pink0 white--text"
                   v-else
                   depressed
                   block
@@ -82,7 +82,7 @@
             
             </v-col>
             <v-col cols="12" sm="4" class="py-1 px-1">
-            <isgood1 @kill="kill"></isgood1></v-col>
+            <isgood1 @showparent="showparent"></isgood1></v-col>
             </v-row>
 
         </v-card-text>
@@ -93,6 +93,12 @@
 import isgood1 from "./isgood1.vue"
 
 export default {
+  props: {
+    inputname: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
       before: true,
@@ -109,14 +115,20 @@ export default {
     kill(){
       this.$emit('kill')
       console.log("L1P1")
+    },
+    showparent(show){
+      this.$emit('showparent',show)
+      console.log("show: ", show)
     }
-  }
+  },
+
 }
 </script>
 
 <style lang="scss" scoped>
 .v-btn{
   font-family: 'CookieRun-Regular';
+  letter-spacing: -0.1px;
   font-style: normal;
 }
 .v-btn--outlined{
@@ -135,6 +147,13 @@ export default {
 .maintext {
   font-family: 'CookieRun-Regular';
   color: #594E32;
+  letter-spacing: -0.1px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.strong {
+  font-family: 'CookieRunOTF-Bold';
+  color: #ec4e88;
   letter-spacing: -0.1px;
   font-size: 18px;
   line-height: 1.5;

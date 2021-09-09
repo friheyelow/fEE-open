@@ -5,7 +5,7 @@
             color="rgba(0, 0, 0, 0)"
           >
             <v-btn
-              color="primary"
+              color="transparent"
               icon
               plain
               v-ripple="false"
@@ -14,13 +14,13 @@
             </v-btn>
             
             <v-spacer></v-spacer>
-            <v-toolbar-title class="toolbar-font primary--text">
+            <v-toolbar-title class="toolbar-font orange1--text">
               정보가 없어요
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
             <v-btn
-              color="primary"
+              color="orange0"
               icon
               plain
               v-ripple="false"
@@ -32,11 +32,12 @@
 
         <v-card-text>
             <h class="maintext">
-              {name}님을 이번 학기 전자과 재학 명단에서도, 과거의 명단에서도 찾을 수 없었어요.<div/>
+              <h class="strong">{{inputname}}</h>님을 이번 학기 전자과 재학 명단에서도, 과거의 명단에서도 찾을 수 없었어요.<div/>
               🚗 명단에 오류/누락이 있거나<div/>
               🚕 입력하신 정보에 오타가 있거나<div/>
               🚙 코드 상의 문제일 수 있어요.<div/>
-              정보를 올바르게 입력하셨는데도 이 창이 뜬다면, 당황하지 마시고 아래의 버튼을 눌러 저희에게 알려주세요.
+              정보를 올바르게 입력하셨는데도 이 창이 뜬다면, 당황하지 마시고 <h class="strong">새로고침</h> 후 다시 시도해주세요. 그래도 문제가 해결되지 않는다면 아래의 버튼을 눌러 문제를 신고해주세요.
+              (버튼은 모바일에서만 작동합니다)
             </h>
 
             <v-row class="mt-2 px-2 pb-2" justify="center">
@@ -46,7 +47,7 @@
                   <transition name="fade" mode="in-out">
                   <v-btn
                   v-if="hover"
-                  class=" primary--text"
+                  class="orange1 white--text"
                   depressed
                   block
                   height="40"
@@ -56,10 +57,10 @@
                   v-on="on"
                   @click="openKatalk()"
                   >
-                  <i class="fas fa-meh-rolling-eyes fa-2x "></i>
+                  <i class="fas fa-rocket fa-2x "></i>
                   </v-btn>
                   <v-btn
-                  class=" primary--text"
+                  class="orange0 white--text"
                   v-else
                   depressed
                   block
@@ -86,23 +87,27 @@
 
 <script>
 export default {
-
-    methods: {
-      openKatalk(){
-        window.open('http://qr.kakao.com/talk/mV45Z9kUIEu3HrR5XcA8eWcspmM-')
-      },
-      kill(){
-      this.$emit('kill')
-      console.log("notfound")
+  props: {
+    inputname: {
+      type: String,
+      required: true,
     }
+  },
+  methods: {
+    openKatalk(){
+      window.open('http://qr.kakao.com/talk/mV45Z9kUIEu3HrR5XcA8eWcspmM-')
+    },
+    kill(){
+    this.$emit('kill')
     }
-
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .v-btn{
   font-family: 'CookieRun-Regular';
+  letter-spacing: -0.1px;
   font-style: normal;
 }
 .v-btn--outlined{
@@ -133,6 +138,14 @@ export default {
   border-radius:20px;
 }
 .cardborder{
-  border: 3px solid #ec4e88;
+  border: 3px solid #FD923A;
 }
+.strong {
+  font-family: 'CookieRunOTF-Bold';
+  color: #FD923A;
+  letter-spacing: -0.1px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
 </style>

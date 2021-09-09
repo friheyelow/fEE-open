@@ -19,8 +19,9 @@
           v-ripple="false"
           v-bind="attrs"
           v-on="on"
+          @click="next"
           >
-          <i class="fas fa-meh-rolling-eyes fa-2x "></i>
+          <i class="fas fa-donate fa-2x "></i>
           </v-btn>
           <v-btn
           class="blue0 white--text"
@@ -32,6 +33,7 @@
           v-ripple="false"
           v-bind="attrs"
           v-on="on"
+          @click="next"
           >
           과비 납부하기
           </v-btn>
@@ -50,7 +52,7 @@
               icon
               plain
               v-ripple="false"
-              @click="$emit('before')"
+              @click="before"
             >
               <i class="fas fa-arrow-left fa-2x"></i>
             </v-btn>
@@ -66,7 +68,7 @@
               icon
               plain
               v-ripple="false"
-              @click="kill"
+              @click="dialog=false"
             >
               <i class="fas fa-times fa-2x"></i>
             </v-btn>
@@ -135,7 +137,7 @@ export default {
     return {
       btext: '계좌 복사하기',
       btext2: '계좌 복사하기',
-      dialog: false
+      dialog: null
     }
     
   },
@@ -152,10 +154,17 @@ export default {
         accountInfo.value = ''
         accountInfo.type = 'hidden'
       },
-      kill() {
-        this.$emit("kill")
-        console.log("kill emitted")
-        this.dialog = !this.dialog
+      before(){
+        this.$emit("showparent", true)
+        console.log("before clicked")
+        this.dialog = false
+        this.btext = '계좌 복사하기'
+        this.btext2 = '계좌 복사하기'
+      },
+      next(){
+        this.$emit("showparent", false)
+        console.log("next clicked")
+        this.dialog = true
       }
     }
 

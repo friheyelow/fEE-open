@@ -12,6 +12,7 @@
   "dependencies": {
     "@grapecity/spread-excelio": "^14.1.6",
     "@grapecity/spread-sheets": "^14.1.6",
+    "ani-cursor": "^0.0.5",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.10",
     "core-js": "^3.6.5",
