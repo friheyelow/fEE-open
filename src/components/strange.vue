@@ -144,12 +144,10 @@
       },
       before(){
         this.$emit("showparent", true)
-        console.log("before clicked")
         this.dialog = false
       },
       next(){
         this.$emit("showparent", false)
-        console.log("next clicked")
         this.dialog = true
       }
     }

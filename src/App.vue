@@ -14,7 +14,7 @@
     <v-row class="text-center" justify="center" align="center">
 
       <v-col class="pt-0 pb-0 ma-0">
-        <div style="line-height:105%" v-resize-text="{ratio:2, minFontSize: '15px', maxFontSize: '50vw', delay: 200,}">
+        <div style="line-height:105%" v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '25vw', delay: 200,}">
           <h class="title1">⚡️전기및전자공학부⚡️<br/></h>
           <h class="title2">과비Check ✅</h>
         </div>
@@ -187,7 +187,6 @@ export default {
           for (let i = 0; i < data[j].length; i++) {
             if (name==data[j][i].name && id==data[j][i].id){
               matchlist.push(data[j][i])
-              console.log("data match!")
               if (j==0){
                 isMember = true
               }
@@ -195,9 +194,7 @@ export default {
           }
           
         }
-        console.log("matchlist is: ", matchlist)
         if (matchlist.length == 0){
-          console.log("loop ended. not found in the list")
           return `notfound`
         }
         else {
@@ -228,15 +225,12 @@ export default {
     },
     updateName(){
       this.firstname = this.name.substring(1,)
-      console.log("fistname is ", this.firstname)
     },
     kill(){
       this.dialog = !this.dialog
-      console.log("close signal at app.vue")
     },
     showparent(show){
       this.dialog = show
-      console.log("show at app.vue: ", show)
     }
   }
 }
@@ -290,7 +284,7 @@ font-style: normal;
 .backg{
   background-color:#f2f4f89c;
   font-family: 'CookieRun-Regular';
-  color: #594E32;
+  color: #d1cfce;
   letter-spacing: -0.1px;
 }
 

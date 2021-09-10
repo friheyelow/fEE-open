@@ -114,11 +114,9 @@ export default {
     },
     kill(){
       this.$emit('kill')
-      console.log("L1P1")
     },
     showparent(show){
       this.$emit('showparent',show)
-      console.log("show: ", show)
     }
   },
 

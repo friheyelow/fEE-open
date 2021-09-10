@@ -156,14 +156,12 @@ export default {
       },
       before(){
         this.$emit("showparent", true)
-        console.log("before clicked")
         this.dialog = false
         this.btext = '계좌 복사하기'
         this.btext2 = '계좌 복사하기'
       },
       next(){
         this.$emit("showparent", false)
-        console.log("next clicked")
         this.dialog = true
       }
     }
