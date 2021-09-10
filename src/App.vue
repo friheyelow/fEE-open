@@ -13,14 +13,14 @@
     </v-row>
     <v-row class="text-center" justify="center" align="center">
       <v-col class="pt-0 pb-0 ma-0">
-        <div style="line-height:105%" v-resize-text="{ratio:1.9, minFontSize: '12px', maxFontSize: '25vw', delay: 200,}">
-          <h class="title1">⚡️전기및전자공학부⚡️<br/></h>
-        </div>
-        <div style="line-height:105%" v-resize-text="{ratio:1.9, minFontSize: '12px', maxFontSize: '25vw', delay: 200,}">
-          <h class="title2">과비Check ✅</h>
+        <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
+          <h class="maintext1 cardblue1--text">⚡️전기및전자공학부⚡️<br/></h>
         </div>
         <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
-          <h class="maintext1">~ 오픈 베타 버전 ~</h>
+          <h class="maintext1 green1--text">과비Check ✅</h>
+        </div>
+        <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
+          <h class="title1">~ 오픈 베타 버전 ~</h>
         </div>
         <div class="mt-1" v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '25vw', delay: 200,}">
           <p class="maintext2">이름과 학번을 입력하세요!</p>
@@ -334,7 +334,7 @@ font-style: normal;
 }
 .v-btn--outlined:disabled{
   border: 3px solid rgb(174, 174, 174);
-  background-color: rgb(238, 238, 238);
+  background-color: rgba(241, 241, 241, 0.856);
 }
 .hand{
     animation:rotate infinite ;
