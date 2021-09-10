@@ -2,7 +2,7 @@
   <v-app>
     <v-main class="backg">
   <v-container>
-    <v-row class="text-center ma-0 pa-0" align="center" justify="center">
+    <v-row class="text-center ma-0 pa-0 mt-1" align="center" justify="center">
       <v-col cols="4" class="mt-3 pt-0 pb-1" >
         <v-img
           :src="require('./assets/kaistee.svg')"
@@ -13,10 +13,10 @@
     </v-row>
     <v-row class="text-center" justify="center" align="center">
       <v-col class="pt-0 pb-0 ma-0">
-        <div v-resize-text="{ratio:0.6, minFontSize: '16px', maxFontSize: '40vw', delay: 200,}">
+        <div v-resize-text="{ratio:0.7, minFontSize: '12px', maxFontSize: '40vw', delay: 200,}">
           <h class="maintext1 cardblue1--text">⚡️전기및전자공학부⚡️<br/></h>
         </div>
-        <div v-resize-text="{ratio:0.6, minFontSize: '16px', maxFontSize: '40vw', delay: 200,}">
+        <div v-resize-text="{ratio:0.7, minFontSize: '12px', maxFontSize: '40vw', delay: 200,}">
           <h class="maintext1 green1--text">과비Check ✅</h>
         </div>
         <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '20vw', delay: 200,}">
@@ -295,8 +295,9 @@ font-style: normal;
 .maintext1 {
   font-family: 'CookieRunOTF-Bold';
   letter-spacing: -0.1vw;
-  color: #959999;
   margin-bottom: 0;
+  
+  line-height:0.9;
 }
 .maintext2 {
   letter-spacing: -0.1vw;
