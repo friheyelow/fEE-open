@@ -125,7 +125,7 @@ export default {
 }
 .maintext {
   font-family: 'CookieRun-Regular';
-  color: #594E32;
+  color: #4e4e4e;
   letter-spacing: -0.1px;
   font-size: 18px;
   line-height: 1.5;

@@ -14,7 +14,7 @@
     <v-row class="text-center" justify="center" align="center">
 
       <v-col class="pt-0 pb-0 ma-0">
-        <div style="line-height:105%" v-resize-text="{ratio:1.9, minFontSize: '10px', maxFontSize: '50vw', delay: 200,}">
+        <div style="line-height:105%" v-resize-text="{ratio:2, minFontSize: '15px', maxFontSize: '50vw', delay: 200,}">
           <h class="title1">⚡️전기및전자공학부⚡️<br/></h>
           <h class="title2">과비Check ✅</h>
         </div>
@@ -163,8 +163,6 @@ export default {
     const sheetList = ["21F", "주전공", "복수등", "부전공", "~17", "복부", "명단x"]
     for (let i=0; i<sheetList.length; i++){
       let newUrl = srcurl.default+sheetList[i]
-      console.log("srcURL:", srcurl.default)
-      console.log("newURL:", newUrl)
       axios.get(newUrl).then((response) => {
         this.eedata[i] = response.data.data
         this.loadedSheetNumb++
@@ -220,6 +218,9 @@ export default {
     loadingMethod(){
       if (!(this.loadedSheetNumb==7)){
         return '넙죽이가 데이터를 긁어오고 있어요···'
+      }
+      else if (!(this.name && this.id && this.id.length==8)){
+        return '빈칸을 채워주세요'
       }
       else {
         return '외쳐 EE!'
@@ -338,8 +339,8 @@ font-style: normal;
   background-color: white;
 }
 .v-btn--outlined:disabled{
-  border: 3px solid #a09e9d;
-  background-color: rgb(202, 202, 202);
+  border: 3px solid #d1cfce;
+  background-color: rgb(235, 235, 235);
 }
 .hand{
     animation:rotate infinite ;

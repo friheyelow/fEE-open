@@ -80,7 +80,7 @@
             </h>
             <v-card class="rounded-corner cardborder2 my-2" elevation="0" align="center">
               <v-card-text>
-                 <v-img src="src/assets/그림1.png"></v-img>
+                 <v-img src="https://user-images.githubusercontent.com/50997319/132789071-9329b080-4969-4c24-a3c8-a7b42546d77d.png"></v-img>
               </v-card-text>
             </v-card>
             <h class="maintext">
@@ -187,7 +187,7 @@
 }
 .maintext {
   font-family: 'CookieRun-Regular';
-  color: #594E32;
+  color: #4e4e4e;
   letter-spacing: -0.1px;
   font-size: 18px;
   line-height: 1.5;
