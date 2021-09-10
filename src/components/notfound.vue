@@ -95,6 +95,7 @@ export default {
   },
   methods: {
     openKatalk(){
+      // 나연 호출
       window.open('http://qr.kakao.com/talk/mV45Z9kUIEu3HrR5XcA8eWcspmM-')
     },
     kill(){

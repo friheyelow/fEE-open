@@ -76,8 +76,8 @@
 
         <v-card-text class=text-center>
             <h class="maintext">
-              우리 1002-455-310519 이훈준<div></div>
-              입금자명: ‘이름+학번뒷5자리’ (ex. ‘훈준90111’)<div></div>
+              우리 1002-562-497630 허찬<div></div>
+              입금자명: ‘이름+학번뒷5자리’ (ex. ‘나연90111’)<div></div>
               금액: 3만원
             </h>
             <input type="hidden" id="accountInfo"/>
@@ -145,7 +145,7 @@ export default {
       copyAccount(){
         const accountInfo = document.getElementById("accountInfo")
         accountInfo.type = 'text'
-        accountInfo.value = '우리 1002-455-310519 이훈준'
+        accountInfo.value = '우리 1002-562-497630 허찬'
         accountInfo.select()
         document.execCommand("copy")
         this.btext="계좌가 복사되었어요"
