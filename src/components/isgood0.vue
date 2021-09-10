@@ -80,7 +80,7 @@
             </h>
             <v-card class="rounded-corner cardborder2 my-2" elevation="0" align="center">
               <v-card-text>
-                 <v-img src="../assets/그림1.png"></v-img>
+                 <v-img src="src/assets/그림1.png"></v-img>
               </v-card-text>
             </v-card>
             <h class="maintext">
