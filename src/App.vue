@@ -132,7 +132,7 @@
 <script>
 import axios from 'axios'
 
-const srcurl = require('./assets/srcurl.txt')
+const srcurl = require('/etc/secrets/srcurl.txt')
 
 import L0P0 from './components/L0P0.vue'
 import L0P1 from './components/L0P1.vue'
