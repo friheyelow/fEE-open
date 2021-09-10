@@ -13,13 +13,13 @@
     </v-row>
     <v-row class="text-center" justify="center" align="center">
       <v-col class="pt-0 pb-0 ma-0">
-        <div v-resize-text="{ratio:1.6, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
+        <div v-resize-text="{ratio:0.6, minFontSize: '16px', maxFontSize: '40vw', delay: 200,}">
           <h class="maintext1 cardblue1--text">⚡️전기및전자공학부⚡️<br/></h>
         </div>
-        <div v-resize-text="{ratio:1.6, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
+        <div v-resize-text="{ratio:0.6, minFontSize: '16px', maxFontSize: '40vw', delay: 200,}">
           <h class="maintext1 green1--text">과비Check ✅</h>
         </div>
-        <div v-resize-text="{ratio:1.2, minFontSize: '10px', maxFontSize: '30vw', delay: 200,}">
+        <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '20vw', delay: 200,}">
           <h class="subtitle">~ 오픈 베타 버전 ~</h>
         </div>
         <div class="mt-1" v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '25vw', delay: 200,}">
@@ -239,7 +239,7 @@ export default {
 
 <style scoped>
 * {
-  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=70231), grab;
+  cursor: url('src/assets/Watermelon.png'), grab;
 }
 .v-btn{
   letter-spacing: -0.2px;
@@ -265,7 +265,7 @@ font-style: normal;
   color:#929292;
 }
 .backg{
-  background-color:#f2f4f89c;
+  background-color:#f2f4f84b;
   font-family: 'CookieRun-Regular';
   color: #d1cfce;
   letter-spacing: -0.1px;
