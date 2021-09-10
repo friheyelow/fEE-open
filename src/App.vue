@@ -13,14 +13,14 @@
     </v-row>
     <v-row class="text-center" justify="center" align="center">
       <v-col class="pt-0 pb-0 ma-0">
-        <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
+        <div v-resize-text="{ratio:1.6, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
           <h class="maintext1 cardblue1--text">⚡️전기및전자공학부⚡️<br/></h>
         </div>
-        <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
+        <div v-resize-text="{ratio:1.6, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
           <h class="maintext1 green1--text">과비Check ✅</h>
         </div>
-        <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
-          <h class="title1">~ 오픈 베타 버전 ~</h>
+        <div v-resize-text="{ratio:1.2, minFontSize: '10px', maxFontSize: '30vw', delay: 200,}">
+          <h class="subtitle">~ 오픈 베타 버전 ~</h>
         </div>
         <div class="mt-1" v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '25vw', delay: 200,}">
           <p class="maintext2">이름과 학번을 입력하세요!</p>
@@ -239,7 +239,7 @@ export default {
 
 <style scoped>
 * {
-  cursor: url(./assets/cur.gif), grab;
+  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=70231), grab;
 }
 .v-btn{
   letter-spacing: -0.2px;
@@ -249,18 +249,8 @@ export default {
     transition: all 0.3s ease-in-out;
 }
 @font-face {
-  font-family: 'Recipekorea';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'dodam';
-  src: local('dodam'), url('./assets/dodam.ttf') format("truetype");
-}
-@font-face {
-font-family: 'UhBeeTokki';
-src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeTokki.woff') format('woff');
+font-family: 'UhBeeSe_hyun';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeSe_hyun.woff') format('woff');
 font-weight: normal;
 font-style: normal;
 }
@@ -270,16 +260,9 @@ font-style: normal;
     font-weight: normal;
     font-style: normal;
 }
-.title1{
-  font-family:'Recipekorea';
-  color:#2370ce;
-}
-.title2{
-  font-family:'Recipekorea';
-  color:#84C732;
-}
-.test{
-  font-family:'Recipekorea';
+.subtitle{
+  font-family:'UhBeeSe_hyun';
+  color:#929292;
 }
 .backg{
   background-color:#f2f4f89c;
@@ -310,7 +293,7 @@ font-style: normal;
   font-style: normal;
 }
 .maintext1 {
-  font-family: 'CookieRun-Regular';
+  font-family: 'CookieRunOTF-Bold';
   letter-spacing: -0.1vw;
   color: #959999;
   margin-bottom: 0;
