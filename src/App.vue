@@ -239,7 +239,7 @@ export default {
 
 <style scoped>
 * {
-  cursor: url('src/assets/Watermelon.png'), grab;
+  cursor: url("./assets/Watermelon.png"), grab;
 }
 .v-btn{
   letter-spacing: -0.2px;
