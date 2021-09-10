@@ -1,7 +1,7 @@
 <template>
     <v-dialog
       v-model="dialog"
-      transition="dialog-bottom-transition"
+      transition="fade-transition"
       max-width="600px"
       content-class="elevation-0"
       hide-overlay

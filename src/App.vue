@@ -64,7 +64,7 @@
         
     <v-dialog
       v-model="dialog"
-      transition="dialog-bottom-transition"
+      transition="scale-transition"
       max-width="600px"
       content-class="elevation-0"
       hide-overlay
@@ -287,7 +287,7 @@ font-style: normal;
   font-family:'Recipekorea';
 }
 .backg{
-  background-color:#fdfdfd;
+  background-color:#f2f4f89c;
   font-family: 'CookieRun-Regular';
   color: #594E32;
   letter-spacing: -0.1px;
@@ -335,6 +335,7 @@ font-style: normal;
 
 .v-btn--outlined{
   border: 3px solid #FD923A;
+  background-color: white;
 }
 .v-btn--outlined:disabled{
   border: 3px solid #a09e9d;
