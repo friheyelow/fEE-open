@@ -14,7 +14,7 @@
     <v-row class="text-center" justify="center" align="center">
 
       <v-col class="pt-0 pb-0 ma-0">
-        <div style="line-height:105%" v-resize-text="{ratio:1.4, minFontSize: '27px', maxFontSize: '25vw', delay: 200,}">
+        <div style="line-height:105%" v-resize-text="{ratio:1.9, minFontSize: '10px', maxFontSize: '50vw', delay: 200,}">
           <h class="title1">⚡️전기및전자공학부⚡️<br/></h>
           <h class="title2">과비Check ✅</h>
         </div>
