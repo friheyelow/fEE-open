@@ -75,7 +75,7 @@
                   v-on="on"
                   @click="change()"
                   >
-                  따봉넙죽아 고마워~♡
+                  따봉넙죽아 고마워~♥
                   </v-btn>
                   </transition>
                   
