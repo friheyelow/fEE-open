@@ -2,8 +2,8 @@
   <v-app>
     <v-main class="backg">
   <v-container>
-    <v-row class="text-center ma-0 pa-0 mt-1" align="center" justify="center">
-      <v-col cols="4" class="mt-3 pt-0 pb-1" >
+    <v-row class="text-center pa-0 margin" align="center" justify="center">
+      <v-col cols="4" class="mt-3 pt-0 pb-0" >
         <v-img
           :src="require('./assets/kaistee.svg')"
           contain
@@ -243,6 +243,9 @@ export default {
 }
 .v-btn{
   letter-spacing: -0.2px;
+}
+.margin{
+  margin-bottom: -1px;
 }
 .rotate{
     transform: rotate(360deg);
