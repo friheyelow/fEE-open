@@ -12,14 +12,14 @@
       </v-col>
     </v-row>
     <v-row class="text-center" justify="center" align="center">
-
       <v-col class="pt-0 pb-0 ma-0">
-        <div style="line-height:105%" v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '25vw', delay: 200,}">
+        <div style="line-height:105%" v-resize-text="{ratio:1.9, minFontSize: '12px', maxFontSize: '25vw', delay: 200,}">
           <h class="title1">⚡️전기및전자공학부⚡️<br/></h>
+        </div>
+        <div style="line-height:105%" v-resize-text="{ratio:1.9, minFontSize: '12px', maxFontSize: '25vw', delay: 200,}">
           <h class="title2">과비Check ✅</h>
         </div>
-        <div></div>
-        <div v-resize-text="{ratio:1.9, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
+        <div v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '40vw', delay: 200,}">
           <h class="maintext1">~ 오픈 베타 버전 ~</h>
         </div>
         <div class="mt-1" v-resize-text="{ratio:1.3, minFontSize: '10px', maxFontSize: '25vw', delay: 200,}">
@@ -310,9 +310,9 @@ font-style: normal;
   font-style: normal;
 }
 .maintext1 {
-  font-family: 'UhBeeSeulvely';
-  letter-spacing: -0.3vw;
-  color: #25AABE;
+  font-family: 'CookieRun-Regular';
+  letter-spacing: -0.1vw;
+  color: #959999;
   margin-bottom: 0;
 }
 .maintext2 {
@@ -333,8 +333,8 @@ font-style: normal;
   background-color: white;
 }
 .v-btn--outlined:disabled{
-  border: 3px solid #d1cfce;
-  background-color: rgb(235, 235, 235);
+  border: 3px solid rgb(174, 174, 174);
+  background-color: rgb(238, 238, 238);
 }
 .hand{
     animation:rotate infinite ;
