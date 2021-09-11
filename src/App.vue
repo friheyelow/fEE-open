@@ -123,6 +123,19 @@
     </v-btn>
       </v-col>
     </v-row>
+    <v-row class="text-center">
+      <v-col>
+        <h class="bugtext">
+          * 현재까지 보고된 문제 목록 <div/>
+          - 간혹 결과가 등록된 정보와 다르게 뜨기도 해서 원인을 파악 중에 있어요. 여러 번 시도해보시는 걸 추천드려요. <div/>
+          - 국제학생의 경우, 학사시스템에 등록된 이름을 그대로 입력해야 조회가 가능해요. 또한 학사시스템 상에서 이름을 수정한 기록이 있다면 총무를 통해 직접 문의 부탁드려요.<div/>
+          international students: In the case of international students, you must enter the name registered in the KAIST Portal.<div/>
+          Also, if you have changed the name at KAIST Portal, please contact Students' committee.<div/>
+          (@shoutoutto.ee or eekiastofficial@gmail.com)
+        </h>
+        
+      </v-col>
+    </v-row>
 
   </v-container>
   </v-main>
@@ -133,6 +146,7 @@
 import axios from 'axios'
 
 const srcurl = require('/etc/secrets/srcurl.txt')
+// const srcurl = require('./assets/srcurl.txt')
 
 import L0P0 from './components/L0P0.vue'
 import L0P1 from './components/L0P1.vue'
@@ -296,7 +310,6 @@ font-style: normal;
   font-family: 'CookieRunOTF-Bold';
   letter-spacing: -0.1vw;
   margin-bottom: 0;
-  
   line-height:0.9;
 }
 .maintext2 {
@@ -338,4 +351,11 @@ font-style: normal;
   
 }
 
+.bugtext{
+  font-family: 'CookieRun-Regular';
+  margin-bottom: 0;
+  line-height:0.9;
+  font-size: 12px;
+  color:#6d6d6d;
+}
 </style>
